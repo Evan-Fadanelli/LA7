@@ -1,28 +1,41 @@
 package edu.wmich.cs1120.efadanelli.LA7;
 
+import java.util.NoSuchElementException;
+
 public class PriorityQueue<E> {
 	
-	Node<E> head;
-	Node<E> rear;
+	Node<E> head = null;
+	Node<E> rear = null;
 	
 	public boolean isEmpty() {
-		if(head == null)
-			return true;
-		else
-			return false;
+		return head == null;
 	}
 	
 	public void enqueue(E data) {
-		if(head == null) {
-			head = new Node(data);
-			rear = head;
+		Node<E> newNode = new Node(data, null);
+		if(isEmpty()) {
+			head = newNode;
 		}else {
-			
+			rear.next = newNode;
 		}
+		
 	}
 	
 	public E dequeue() {
+		if(isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		E item = head.data;
+		if(rear == head) {
+			rear = null;
+		}
+		head = head.next;
+		return item;
 		
-		return null;
+	}
+	
+	public void Qprint() {
+		
+		
 	}
 }
