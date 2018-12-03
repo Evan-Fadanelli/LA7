@@ -7,6 +7,12 @@ public class Course implements ICourse {
 	int capacity;
 	LinkedList<Node> reigisteredStudents = new LinkedList<Node>();
 	
+	public Course(String courseDept, int courseNumber, int capacity) {
+		this.courseDept = courseDept;
+		this.courseNumber = courseNumber;
+		this.capacity = capacity;
+	}
+	
 	@Override
 	public boolean isFull() {
 		if(reigisteredStudents.size()+1 == capacity)

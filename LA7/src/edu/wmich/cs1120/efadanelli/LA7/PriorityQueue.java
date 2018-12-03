@@ -29,13 +29,14 @@ public class PriorityQueue<E> {
 		if(rear == head) {
 			rear = null;
 		}
-		head = head.next;
-		return item;
-		
+			head = head.next;
+			return item;
 	}
 	
 	public void Qprint() {
-		
-		
+		Node<E> curr = head;
+		do
+			System.out.println(curr.data);
+		while(!(curr == rear));
 	}
 }

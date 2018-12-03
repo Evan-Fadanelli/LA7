@@ -8,6 +8,7 @@ public class Request<T> implements Comparable<T>{
 	String courseDept;
 	int courseNumber;
 	double[][]GPA_Array;
+	double GPA = GPA_Cal(GPA_Array);
 	
 	// Constructor
 	public Request(String studentName, String studentDept, String studentLevel,
@@ -39,11 +40,18 @@ public class Request<T> implements Comparable<T>{
 
 	// Calculate the GPA for a particular student.
 	private double GPA_Cal(double[][] GPA_Array) {
-		return 0;
+		double gps = 0;
+		double credits = 0;
+		for(int i=0;i<GPA_Array.length;i++) {
+			gps = gps + GPA_Array[i][0];
+			credits = credits + GPA_Array[i][1];
+		}			
+		return (gps/credits);
 	}
 	@Override
 	public int compareTo(T arg0) {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 }
