@@ -17,7 +17,8 @@ public class Controller implements IController{
 		queue = requestQueue;
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {// Two main strings?
+		
 		PriorityQueue<Request> requestQueue = new PriorityQueue<Request>();
 		LinkedList<Course> courses = new LinkedList<Course>();
 		BufferedReader fileIn = new BufferedReader(new FileReader("course.txt"));
