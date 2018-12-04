@@ -27,6 +27,7 @@ public class Course implements ICourse {
 		if(!(isFull())) {
 			Node<String> student = new Node<String>(name);
 			reigisteredStudents.add(student);
+			capacity++;
 		}
 	}
 

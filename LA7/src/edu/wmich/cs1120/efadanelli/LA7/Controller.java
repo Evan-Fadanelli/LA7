@@ -26,8 +26,8 @@ public class Controller implements IController{
 		IController control = new Controller(requestQueue, courses, fileIn, fileIn1);
 		control.readCourseFile();
 		control.readRequestFile();
-		control.processRequests();
-		control.printClassList();
+//		control.processRequests();
+//		control.printClassList();
 	}
 
 	
@@ -45,16 +45,19 @@ public class Controller implements IController{
 	@Override
 	public void readRequestFile() {
 		// TODO Auto-generated method stub
-		Scanner fileReader = new Scanner(courseFileInput);
+		Scanner fileReader = new Scanner(requestFileInput);
 		while(fileReader.hasNextLine()) {
+			System.out.println("READING FILE LINE");
 			String[] line = fileReader.nextLine().split(",");
 			double[][] GPA_Array = new double[4][2];
-//			for(int i=0;i<4;i=i+2) {
-//				GPA_Array = Double.parseDouble(line[i]);
-//				GPA_Array = Double.parseDouble(line[i+1]);
-//			}
-//			Request room = new Request();
-//			coursesInput.add(room);
+			int j = 0;
+			for(int i=5;i<line.length;i=i+2) {
+				GPA_Array[j][0] = Double.parseDouble(line[i]);
+				GPA_Array[j][1] = Double.parseDouble(line[i+1]);
+				j++;
+			}
+			Request req = new Request(line[0], line[2], line[1], line[3], Integer.parseInt(line[4]), GPA_Array);
+			addRequest(req);
 		}
 		fileReader.close();
 	}
@@ -62,13 +65,13 @@ public class Controller implements IController{
 	@Override
 	public void addRequest(Request req) {
 		// TODO Auto-generated method stub
-		
+		queue.enqueue(req);
 	}
 
 	@Override
 	public void processRequests() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -82,5 +85,4 @@ public class Controller implements IController{
 		// TODO Auto-generated method stub
 
 	}
-
 }

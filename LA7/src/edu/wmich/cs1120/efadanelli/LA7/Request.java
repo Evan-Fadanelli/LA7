@@ -1,24 +1,25 @@
 package edu.wmich.cs1120.efadanelli.LA7;
 
-public class Request<T> implements Comparable<T>{
+public class Request implements Comparable<Request>{
 	
 	String name;
-	String dept;
+	String studentDept;
 	String level;
 	String courseDept;
 	int courseNumber;
 	double[][]GPA_Array;
-	double GPA = GPA_Cal(GPA_Array);
+	double GPA;
 	
 	// Constructor
 	public Request(String studentName, String studentDept, String studentLevel,
 				String courseDept, int courseNumber, double[][] GPA_Array) {
 		name = studentName;
-		dept = studentDept;
+		this.studentDept = studentDept;
 		level = studentLevel;
 		this.courseDept = courseDept;
 		this.courseNumber = courseNumber;
 		this.GPA_Array = GPA_Array;
+		this.GPA = GPA_Cal(GPA_Array);
 	}
 	// Returns number of years to graduation (0 for seniors, 1 for juniors etc.). This is determined from the 
 	// student’s level – senior, junior, etc.
@@ -49,9 +50,27 @@ public class Request<T> implements Comparable<T>{
 		return (gps/credits);
 	}
 	@Override
-	public int compareTo(T arg0) {
+	public int compareTo(Request req) {
 		// TODO Auto-generated method stub
-		
-		return 0;
+		if(!(req.studentDept.equals(req.courseDept))) 
+			return(1);
+		else {
+			if(req.yearsFromGraduation(req.level) <  this.yearsFromGraduation(this.level))
+				return(-1);
+			else {
+				if(req.yearsFromGraduation(req.level) >  this.yearsFromGraduation(this.level))
+					return(1);
+				else {
+					if(req.GPA < this.GPA)
+						return(-1);
+					else {
+						if(req.GPA > this.GPA)
+							return(1);
+						else
+							return(-1);
+					}
+				}
+			}
+		}
 	}
 }
