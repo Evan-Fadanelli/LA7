@@ -25,7 +25,7 @@ public class LinkedList<E> {
 	// get the object in specific position in the LinkedList used to print the enrolled student contents inside the Course class and return the name
 	public E get(int position) {
 		Node<E> curr = head;
-		for(int i=0;i<=position;i++) {
+		for(int i=0;i<position;i++) {
 			try {
 				curr = curr.next;
 			}catch(NullPointerException e) {
@@ -36,7 +36,7 @@ public class LinkedList<E> {
 	}
 	// Return number of elements in the list.
 	public int size() {
-		int count = 0;
+		int count = 1;
 		Node<E> curr = head;
 		if(head == null)
 			return 1;

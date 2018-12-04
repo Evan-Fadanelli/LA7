@@ -7,13 +7,13 @@ public class Controller implements IController{
 
 	BufferedReader courseFileInput;
 	BufferedReader requestFileInput;
-	LinkedList<Course> coursesInput;
+	LinkedList<Course> courses;
 	PriorityQueue<Request> queue;
 	
 	public Controller(PriorityQueue<Request> requestQueue,LinkedList<Course> courses,BufferedReader courseFile,BufferedReader requestFile){
 		courseFileInput = courseFile;
 		requestFileInput = requestFile;
-		coursesInput = courses;
+		this.courses = courses;
 		queue = requestQueue;
 	}
 	
@@ -26,8 +26,8 @@ public class Controller implements IController{
 		IController control = new Controller(requestQueue, courses, fileIn, fileIn1);
 		control.readCourseFile();
 		control.readRequestFile();
-//		control.processRequests();
-//		control.printClassList();
+		control.processRequests();
+		control.printClassList();
 	}
 
 	
@@ -35,10 +35,13 @@ public class Controller implements IController{
 	public void readCourseFile() {
 		Scanner fileReader = new Scanner(courseFileInput);
 		while(fileReader.hasNextLine()) {
-			String[] line = fileReader.nextLine().split(",");
-			Course room = new Course(line[0],Integer.parseInt(line[1]),Integer.parseInt(line[2]));
-			coursesInput.add(room);
+			String line = fileReader.nextLine();
+			System.out.println(line);
+			String[] lineA = line.split(",");
+			Course room = new Course(lineA[0],Integer.parseInt(lineA[1]),Integer.parseInt(lineA[2]));
+			courses.add(room);
 		}
+		System.out.println("");
 		fileReader.close();
 	}
 
@@ -47,7 +50,6 @@ public class Controller implements IController{
 		// TODO Auto-generated method stub
 		Scanner fileReader = new Scanner(requestFileInput);
 		while(fileReader.hasNextLine()) {
-			System.out.println("READING FILE LINE");
 			String[] line = fileReader.nextLine().split(",");
 			double[][] GPA_Array = new double[4][2];
 			int j = 0;
@@ -56,9 +58,10 @@ public class Controller implements IController{
 				GPA_Array[j][1] = Double.parseDouble(line[i+1]);
 				j++;
 			}
-			Request req = new Request(line[0], line[2], line[1], line[3], Integer.parseInt(line[4]), GPA_Array);
+			Request req = new Request(line[0].trim(), line[2].trim(), line[1].trim(), line[3].trim(), Integer.parseInt(line[4]), GPA_Array);
 			addRequest(req);
 		}
+		queue.Qprint();
 		fileReader.close();
 	}
 
@@ -71,18 +74,39 @@ public class Controller implements IController{
 	@Override
 	public void processRequests() {
 		// TODO Auto-generated method stub
-		
+		while(!(queue.isEmpty())){
+			Request req = queue.dequeue();
+			System.out.println("Processing request " + req);
+			boolean fail = true;
+			for(int i=0;i<courses.size();i++) {
+				if(req.courseDept.equals(courses.get(i).courseDept) && !(courses.get(i).isFull()) && req.courseNumber == courses.get(i).courseNumber) {
+					fail=false;
+					System.out.println("Succesfully added " + req.name + " to " + courses.get(i).courseDept + courses.get(i).courseNumber);
+					courses.get(i).addStudent(req.name);
+				}
+			}
+			if(fail)
+				System.out.println("Faied to process request " + req);
+		}
+		System.out.println("");
+		queue.Qprint();
 	}
 
 	@Override
 	public Course getCourse(String courseDept, int courseNumber) {
 		// TODO Auto-generated method stub
-		return null;
+		for(int i=0;i<courses.size();i++) {
+			if(courseDept.equals(courses.get(i).courseDept) && courseNumber == courses.get(i).courseNumber)
+				return courses.get(i);
+		}
+			return null;
 	}
 
 	@Override
 	public void printClassList() {
 		// TODO Auto-generated method stub
-
+		for(int i=0;i<courses.size();i++) {
+			courses.get(i).printClassList();
+		}
 	}
 }

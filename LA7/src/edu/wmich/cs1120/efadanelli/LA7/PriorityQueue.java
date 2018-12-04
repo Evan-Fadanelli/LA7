@@ -16,10 +16,8 @@ public class PriorityQueue<E extends Comparable<E>> {
 		if(isEmpty()) {
 			head = newNode;
 			rear = newNode;
-			System.out.println("QUEUEING UP FIRST");
 		}else {
 			if(data.compareTo(head.data) == 1) {
-				System.out.println("QUEUEING UP HEAD");
 				newNode.next = head;
 				head = newNode;				
 			}else {
@@ -27,7 +25,6 @@ public class PriorityQueue<E extends Comparable<E>> {
 				Node<E> prev = head;
 				do {
 					if(data.compareTo(curr.data) == 1) {
-						System.out.println("QUEUEING UP MID");
 						newNode.next = curr;
 						prev.next = newNode;
 						break;
@@ -39,25 +36,27 @@ public class PriorityQueue<E extends Comparable<E>> {
 				if(curr == rear) {
 					rear.next = newNode;
 					rear = newNode;
-					System.out.println("QUEUEING UP REAR");
 				}
 			}
 		}
 	}
 	
 	public E dequeue() {
+		E item = head.data;
 		if(isEmpty()) {
 			System.out.println("weffjdskwoejfdikmsljk");
-		}
-		E item = head.data;
-		if(rear == head)
-			rear = null;
+		}else {
+			item = head.data;
+			if(rear == head)
+				rear = null;
 			head = head.next;
-			return item;
+		}
+		return item;
 	}
 	
 	public void Qprint() {
 		Node<E> curr = head;
+		System.out.println("<<<<<<<<<<<< Beginning of Queue Contents >>>>>>>>>>>>>>>>>");
 		if(isEmpty())
 			System.out.println("The queue is empty");
 		else {
@@ -67,5 +66,6 @@ public class PriorityQueue<E extends Comparable<E>> {
 			}while(!(curr == rear));
 			System.out.println(rear.data);
 		}
+		System.out.println("<<<<<<<<<<<< End of Queue Contents >>>>>>>>>>>>>>>>>\n");
 	}
 }
