@@ -17,7 +17,7 @@ public class Controller implements IController{
 		queue = requestQueue;
 	}
 	
-	public static void main(String[] args) throws IOException {// Two main strings?
+	public static void main(String[] args) throws IOException {
 		
 		PriorityQueue<Request> requestQueue = new PriorityQueue<Request>();
 		LinkedList<Course> courses = new LinkedList<Course>();
@@ -47,7 +47,7 @@ public class Controller implements IController{
 
 	@Override
 	public void readRequestFile() {
-		// TODO Auto-generated method stub
+		
 		Scanner fileReader = new Scanner(requestFileInput);
 		while(fileReader.hasNextLine()) {
 			String[] line = fileReader.nextLine().split(",");
@@ -67,13 +67,13 @@ public class Controller implements IController{
 
 	@Override
 	public void addRequest(Request req) {
-		// TODO Auto-generated method stub
+		
 		queue.enqueue(req);
 	}
 
 	@Override
 	public void processRequests() {
-		// TODO Auto-generated method stub
+	
 		while(!(queue.isEmpty())){
 			Request req = queue.dequeue();
 			System.out.println("Processing request " + req);
@@ -94,7 +94,7 @@ public class Controller implements IController{
 
 	@Override
 	public Course getCourse(String courseDept, int courseNumber) {
-		// TODO Auto-generated method stub
+		
 		for(int i=0;i<courses.size();i++) {
 			if(courseDept.equals(courses.get(i).courseDept) && courseNumber == courses.get(i).courseNumber)
 				return courses.get(i);
@@ -104,7 +104,7 @@ public class Controller implements IController{
 
 	@Override
 	public void printClassList() {
-		// TODO Auto-generated method stub
+		
 		for(int i=0;i<courses.size();i++) {
 			courses.get(i).printClassList();
 		}
