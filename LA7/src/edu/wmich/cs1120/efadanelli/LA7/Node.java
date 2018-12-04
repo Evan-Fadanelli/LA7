@@ -2,33 +2,32 @@ package edu.wmich.cs1120.efadanelli.LA7;
 
 public class Node<E> implements INode{
 
-	E data;
-	Node<E> next;
+	E data;//the data inside the node
+	Node<E> next;//next pointer
 	
 	Node(E dataValue){
-		data = dataValue;	
+		data = dataValue;	//data inside the node
 	}
 	
 	Node(E dataValue, Node<E> nextNode){
-		data = dataValue;
-		next = nextNode;
+		data = dataValue;//what inside the node
+		next = nextNode;//what the node points to next
 	}
 	
 	@Override
 	public E getData() {
-		// TODO Auto-generated method stub
-		return data;
+		return data;//return data
 	}
 
 	@Override
 	public Node<E> getNext() {
-		// TODO Auto-generated method stub
-		return next;
+		
+		return next; //return next
 	}
 
 	@Override
 	public void setNext(Node next) {
-		// TODO Auto-generated method stub
-		this.next = next;
+		
+		this.next = next; // this.next points to the next node "next"
 	}
 }

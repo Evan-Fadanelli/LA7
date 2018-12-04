@@ -49,9 +49,18 @@ public class Request implements Comparable<Request>{
 		}			
 		return (gps/credits);
 	}
+	/*
+	 * This method compares the data in being sent by the student. 
+	 * This is what selects where the nodes get Priority Queue up.
+	 * 
+	 * Method calling object is greater than the object it is comparing 
+	 * the method returns a 1.
+	 *  
+	 * Method calling object is 
+	 */
 	@Override
 	public int compareTo(Request req) {
-		// TODO Auto-generated method stub
+		
 		if(!(req.studentDept.equals(req.courseDept))) 
 			return(1);
 		else {
