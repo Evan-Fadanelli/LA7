@@ -1,7 +1,5 @@
 package edu.wmich.cs1120.efadanelli.LA7;
 
-import java.util.NoSuchElementException;
-
 public class PriorityQueue<E extends Comparable<E>> {
 	
 	Node<E> head = null;
