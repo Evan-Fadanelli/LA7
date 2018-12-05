@@ -9,14 +9,14 @@ public class Controller implements IController{
 	BufferedReader requestFileInput;
 	LinkedList<Course> courses;
 	PriorityQueue<Request> queue;
-	
+	//The constructor for the class
 	public Controller(PriorityQueue<Request> requestQueue,LinkedList<Course> courses,BufferedReader courseFile,BufferedReader requestFile){
 		courseFileInput = courseFile;
 		requestFileInput = requestFile;
 		this.courses = courses;
 		queue = requestQueue;
-	}
-	
+	}//End of constructor
+	//Main
 	public static void main(String[] args) throws IOException {
 		
 		PriorityQueue<Request> requestQueue = new PriorityQueue<Request>();
@@ -28,20 +28,23 @@ public class Controller implements IController{
 		control.readRequestFile();
 		control.processRequests();
 		control.printClassList();
-	}
+	}//End of Main
 
-	
+	/*
+	 * This method is to read the file it is sent and break it
+	 * into tokens which are used to make the course room list
+	 */
 	@Override
 	public void readCourseFile() {
-		Scanner fileReader = new Scanner(courseFileInput);
-		while(fileReader.hasNextLine()) {
-			String line = fileReader.nextLine();
-			System.out.println(line);
+		Scanner fileReader = new Scanner(courseFileInput);//Declare Scanner
+		while(fileReader.hasNextLine()) {//loop while the file has a next line
+			String line = fileReader.nextLine();//line gets next line string
+			System.out.println(line);//DISPLAY TO USER
 			String[] lineA = line.split(",");
-			Course room = new Course(lineA[0],Integer.parseInt(lineA[1]),Integer.parseInt(lineA[2]));
-			courses.add(room);
+			Course room = new Course(lineA[0],Integer.parseInt(lineA[1]),Integer.parseInt(lineA[2]));//create a course class object
+			courses.add(room);//add it to
 		}
-		System.out.println("");
+		System.out.println("");//
 		fileReader.close();
 	}
 
