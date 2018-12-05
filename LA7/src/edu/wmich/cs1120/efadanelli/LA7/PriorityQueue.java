@@ -44,7 +44,7 @@ public class PriorityQueue<E extends Comparable<E>> {
 	public E dequeue() {
 		E item = head.data;
 		if(isEmpty()) {
-			System.out.println("weffjdskwoejfdikmsljk");
+			System.out.println("The queue is empty");
 		}else {
 			item = head.data;
 			if(rear == head)
