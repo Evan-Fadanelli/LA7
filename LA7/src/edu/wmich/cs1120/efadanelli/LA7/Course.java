@@ -25,10 +25,11 @@ public class Course implements ICourse {
 	 */
 	@Override
 	public boolean isFull() {
-		if(reigisteredStudents.size() >= capacity)//if the registered students is greater or equal to capacity
-			return true;//return true
-		else //otherwise return false
-			return false;
+//		if(reigisteredStudents.size() >= capacity)//if the registered students is greater or equal to capacity
+//			return true;//return true
+//		else //otherwise return false
+//			return false;
+		return reigisteredStudents.size() >= capacity;
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class Course implements ICourse {
 	 * @param name the name of the student
 	 */
 	public void addStudent(String name) {
-		// TODO Auto-generated method stub
+		
 		if(!(isFull())) {//if the class is not full
 			Node<String> student = new Node<String>(name);//make a new student Node
 			reigisteredStudents.add(student);//add it to registered Student list
@@ -49,7 +50,7 @@ public class Course implements ICourse {
 	 * prints the list of students in the class
 	 */
 	public void printClassList() {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Students signed up for " + courseDept + courseNumber + ":");//tell the user what course this is
 		for(int i=0;i<reigisteredStudents.size();i++) {//traverse through the registered student list
 			System.out.println(reigisteredStudents.get(i).getData());//print the names of the students
